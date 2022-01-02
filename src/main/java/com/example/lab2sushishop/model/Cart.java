@@ -1,27 +1,39 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class Cart {
-    private int cart_Id;
-    private int user_Id;
+@Component
+@Scope("prototype")
+public class Cart implements Entity{
+    private int ID;
+
+
+      private int user_ID;
+
+
     private int client_ID;
+
     private double totalPriceUAH;
-    private LocalDate date;
+    private String date;
+
+    @NotBlank
+    @Size(min=2, max=50)
     private String deliveryAddr;
     private String status;
 
     public Cart() { }
 
-    public Cart(int cart_Id,
-                int user_Id,
+    public Cart(int user_ID,
                 int client_ID,
                 double totalPriceUAH,
-                LocalDate date,
+                String date,
                 String deliveryAddr,
                 String status) {
-        this.cart_Id = cart_Id;
-        this.user_Id = user_Id;
+        this.user_ID = user_ID;
         this.client_ID = client_ID;
         this.totalPriceUAH = totalPriceUAH;
         this.date = date;
@@ -29,20 +41,20 @@ public class Cart {
         this.status = status;
     }
 
-    public int getCart_Id() {
-        return cart_Id;
+    public int getID() {
+        return ID;
     }
 
-    public void setCart_Id(int cart_Id) {
-        this.cart_Id = cart_Id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getUser_Id() {
-        return user_Id;
+    public int getUser_ID() {
+        return user_ID;
     }
 
-    public void setUser_Id(int user_Id) {
-        this.user_Id = user_Id;
+    public void setUser_ID(int user_ID) {
+        this.user_ID = user_ID;
     }
 
     public int getClient_ID() {
@@ -61,11 +73,11 @@ public class Cart {
         this.totalPriceUAH = totalPriceUAH;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -88,8 +100,8 @@ public class Cart {
     @Override
     public String toString() {
         return "Cart{" +
-                "cart_Id=" + cart_Id +
-                ", user_Id=" + user_Id +
+                "ID=" + ID +
+                ", user_ID=" + user_ID +
                 ", client_ID=" + client_ID +
                 ", totalPriceUAH=" + totalPriceUAH +
                 ", date=" + date +

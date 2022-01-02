@@ -1,8 +1,17 @@
 package com.example.lab2sushishop.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class Client implements Entity{
     private int ID;
+
+    @NotBlank
+    @Size(min=2, max=20)
     private String fullName;
+
+    @NotBlank
+    @Size(min=2, max=50)
     private String address;
 
     public Client() {
@@ -16,6 +25,11 @@ public class Client implements Entity{
 
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public void setDate(String date) {
+
     }
 
     public void setID(int ID) {

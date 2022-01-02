@@ -9,6 +9,6 @@ public interface Entity {
 
       String toString();
       int getID();
-
+      void setDate(String date);
       void setID(int i);
 }

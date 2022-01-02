@@ -34,10 +34,9 @@ public class CategoryController {
         return "categories/editCat";
     }
 
-    @PostMapping("/{id}/edit")
-    public String update(@ModelAttribute("category") Category category, @PathVariable("id") int id)
+    @PostMapping("/edit")
+    public String update(@ModelAttribute("category") Category category)
     {
-        category.setID(id);
         repositor.update(category);
         return "redirect:/categories";
     }

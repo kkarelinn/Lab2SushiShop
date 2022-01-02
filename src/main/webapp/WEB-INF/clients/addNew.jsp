@@ -14,10 +14,22 @@
 </head>
 <body>
 <p> ADD new client</p>
-<form:form  action="/clients" method="post" modelAttribute="client">
-    <form:label path="fullName">fullName: </form:label> <form:input type="text" path="fullName"/>
-    <form:label path="address">address: </form:label> <form:input type="text" path="address"/>
-    <input type="submit" value="Submit"/>
+<form:form action="/clients/new" method="post" modelAttribute="client">
+
+    <div>
+        <form:label path="fullName">title: </form:label>
+        <form:input type="text" path="fullName"/>
+        <form:errors path="fullName"/>
+    </div>
+    <div>
+        <form:label path="address">address: </form:label>
+        <form:input type="textID" path="address" cssStyle="width: 500px"/>
+        <form:errors path="address"/>
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+
 </form:form>
 <br>
 <form action="/">

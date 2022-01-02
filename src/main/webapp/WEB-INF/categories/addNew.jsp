@@ -15,10 +15,21 @@
 <body>
 <p> ADD new category</p>
 <form:form  action="/categories" method="post" modelAttribute="category">
-    <form:label path="title">title: </form:label> <form:input type="text" path="title"/>
-    <form:label path="description">description: </form:label> <form:input type="text" path="description"/>
 
-    <input type="submit" value="Submit"/>
+    <div>
+        <form:label path="title">title: </form:label>
+        <form:input type="text" path="title"/>
+        <form:errors path="title"/>
+    </div>
+    <div>
+        <form:label path="description">description: </form:label>
+        <form:input type="text" path="description" cssStyle="width: 500px"/>
+        <form:errors path="description"/>
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
+
 </form:form>
 <br>
 <form action="/" >

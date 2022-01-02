@@ -2,26 +2,31 @@ package com.example.lab2sushishop.controllers;
 
 
 import com.example.lab2sushishop.model.Product;
+import com.example.lab2sushishop.model.repositories.RepositProduct;
 import com.example.lab2sushishop.model.repositories.Repositor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-    @Autowired
-            @Qualifier("repositProduct")
+
 Repositor repositor;
 
-  /*  @Autowired
+    @Autowired
     public ProductController(RepositProduct repositor) {
         this.repositor = repositor;
     }
-*/
-  @GetMapping
+    @GetMapping
     public String index(Model model) {
         model.addAttribute("products", repositor.getList());
         return "products/showProd";
@@ -29,25 +34,30 @@ Repositor repositor;
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("product", repositor.show(id));
+       model.addAttribute("product", repositor.show(id));
         return "products/editProd";
     }
 
-    @PostMapping("/{id}/edit")
-    public String update(@ModelAttribute("product") Product product, @PathVariable("id") int id)
+    @PostMapping("/edit")
+    public String update(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult)
     {
-        product.setID(id);
-       repositor.update(product);
+        if (bindingResult.hasErrors())
+            return "products/editProd";
+
+        repositor.update(product);
         return "redirect:/products";
     }
 
     @GetMapping("/new")
     public String newProduct(@ModelAttribute("product") Product product) {
-        return "products/addNew";
+       return "products/addNew";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("product") Product product) {
+    @PostMapping("/new")
+    public String create(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return "products/addNew";
         repositor.addNew(product);
         return "redirect:/products";
     }

@@ -13,11 +13,23 @@
 </head>
 <body>
 <h2>Edit current category</h2>
-<form:form action="/categories/${category.ID}/edit" method="post" modelAttribute="category">
-    <form:label path="title">title: </form:label> <form:input type="text" path="title"/>
-    <form:label path="description" >description: </form:label> <form:input type="text" path="description" cssStyle="width: 500px"/>
+<form:form action="/categories/edit" method="post" modelAttribute="category">
+    <form:input type="hidden" path="ID"/>
+    <div>
+        <form:label path="title">title: </form:label>
+        <form:input type="text" path="title"/>
+        <form:errors path="title"/>
 
-    <input type="submit" value="Submit"/>
+    </div>
+    <div>
+        <form:label path="description">description: </form:label>
+        <form:input type="text" path="description" cssStyle="width: 500px"/>
+        <form:errors path="description"/>
+    </div>
+       <div>
+        <input type="submit" value="Submit"/>
+    </div>
+
 </form:form>
 
 <br>

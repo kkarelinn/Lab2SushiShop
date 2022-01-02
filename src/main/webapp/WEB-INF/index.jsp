@@ -12,22 +12,39 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
 <body>
+<h2>SuShi Shop</h2>
+<table cellpadding="2" width="60%">
+    <tr>
+        <th><form action="/products" >
+            <button>View PRODUCTS</button>
+        </form></th>
+        <th><form action="/categories">
+            <button>View CATEGORIES of products</button>
+        </form></th>
+        <th><form action="/users">
+            <button>View USERS</button>
+        </form></th>
+        <th><form action="/clients" >
+            <button>View CLIENTS</button>
+        </form></th>
+        <th><form action="/carts/allcarts" >
+            <button>View CARTS</button>
+        </form></th>
+        <th><form action="/orders/" >
+            <button>View ORDERS</button>
+        </form></th>
 
-<form action="/products" >
-    <button>View PRODUCTS</button>
+    </tr>
+</table>
+<form action="/carts/" >
+    <button>BUY SuShi</button>
 </form>
 
-<form action="/categories">
-    <button>View CATEGORIES of products</button>
-</form>
 
-<form action="/users">
-    <button>View USERS</button>
-</form>
 
-<form action="/clients" >
-    <button>View CLIENTS</button>
-</form>
+
+
+
 
 
 </body>

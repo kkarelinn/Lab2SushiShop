@@ -32,7 +32,7 @@ public class RepositCategory implements Repositor{
     @Override
     public void addNew(Entity entity) {
         Category category = (Category) entity;
-        if (category.getDate() == null) category.setDate(getNowDate());
+               if (category.getDate() == null) category.setDate(getNowDate());
         base.insertCat(category);
     }
 

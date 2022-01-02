@@ -14,11 +14,26 @@
 </head>
 <body>
 <p> ADD new product</p>
-<form:form  action="/products" method="post" modelAttribute="product">
-    <form:label path="title">title: </form:label> <form:input type="text" path="title"/>
-    <form:label path="description">description: </form:label> <form:input type="text" path="description"/>
-    <form:label path="priceUsd">price-usd: </form:label> <form:input type="double" path="priceUsd"/>
-    <input type="submit" value="Submit"/>
+<form:form  action="/new" method="post" modelAttribute="product">
+    <div>
+        <form:label path="title">title: </form:label>
+        <form:input type="text" path="title"/>
+        <form:errors path="title"/>
+    </div>
+    <div>
+        <form:label path="description">description: </form:label>
+        <form:input type="text" path="description" cssStyle="width: 500px"/>
+        <form:errors path="description"/>
+    </div>
+    <div>
+        <form:label path="priceUsd">price-usd: </form:label>
+        <form:input type="double" path="priceUsd"/>
+        <form:errors path="priceUsd"/>
+    </div>
+    <div>
+        <input type="submit" value="Добавить"/>
+    </div>
+
 </form:form>
 <br>
 <form action="/" >

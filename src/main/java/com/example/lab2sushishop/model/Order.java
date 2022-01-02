@@ -1,46 +1,59 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.stereotype.Component;
 
-public class Order {
-    private int order_Id;
-    private int product_Id;
-    private int cart_Id;
+import javax.validation.constraints.Min;
+
+
+@Component
+public class Order implements Entity {
+    private int ID;
+
+    private int product_ID;
+
+
+    private int cart_ID;
+
     private double totalOrdPriceUAH;
+
+    @Min(value = 1)
     private int quantity;
 
     public Order() {
-           }
+    }
 
-    public Order(int order_Id, int product_Id, int cart_Id, double totalOrdPriceUAH, int quantity) {
-        this.order_Id = order_Id;
-        this.product_Id = product_Id;
-        this.cart_Id = cart_Id;
+    public Order(int product_ID, int cart_ID, double totalOrdPriceUAH, int quantity) {
+
+        this.product_ID = product_ID;
+        this.cart_ID = cart_ID;
         this.totalOrdPriceUAH = totalOrdPriceUAH;
         this.quantity = quantity;
     }
 
-    public int getOrder_Id() {
-        return order_Id;
+    @Override
+    public int getID() {
+        return ID;
     }
 
-    public void setOrder_Id(int order_Id) {
-        this.order_Id = order_Id;
+    @Override
+    public void setID(int i) {
+        this.ID = i;
     }
 
-    public int getProduct_Id() {
-        return product_Id;
+    public int getProduct_ID() {
+        return product_ID;
     }
 
-    public void setProduct_Id(int product_Id) {
-        this.product_Id = product_Id;
+    public void setProduct_ID(int product_ID) {
+        this.product_ID = product_ID;
     }
 
-    public int getCart_Id() {
-        return cart_Id;
+    public int getCart_ID() {
+        return cart_ID;
     }
 
-    public void setCart_Id(int cart_Id) {
-        this.cart_Id = cart_Id;
+    public void setCart_ID(int cart_ID) {
+        this.cart_ID = cart_ID;
     }
 
     public double getTotalOrdPriceUAH() {
@@ -62,11 +75,19 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "order_Id=" + order_Id +
-                ", product_Id=" + product_Id +
-                ", cart_Id=" + cart_Id +
+                "ID=" + ID +
+                ", product_ID=" + product_ID +
+                ", cart_ID=" + cart_ID +
                 ", totalOrdPriceUAH=" + totalOrdPriceUAH +
                 ", quantity=" + quantity +
                 '}';
     }
+
+
+    @Override
+    public void setDate(String date) {
+
+    }
+
+
 }

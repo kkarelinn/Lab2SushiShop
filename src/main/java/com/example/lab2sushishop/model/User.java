@@ -2,11 +2,24 @@ package com.example.lab2sushishop.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Component
 public class User implements Entity{
     private int ID;
+
+    @NotBlank
+    @Size(min=2, max=20)
     private String fullName;
+
+    @Min(value = 1, message = "id should be more than 0")
     private int manager;
+
+    @NotBlank
+    @Size(min=2, max=20)
     private String accessRole;
 
     public User() {
@@ -21,6 +34,11 @@ public class User implements Entity{
 
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public void setDate(String date) {
+
     }
 
     public void setID(int ID) {

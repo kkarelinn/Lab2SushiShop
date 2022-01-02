@@ -14,30 +14,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
 <body>
-    <h2>Clients</h2>
-    <table border="2" width="60%">
+    <h2>All CARTS</h2>
+    <table border="2" cellpadding="2" width="60%">
         <tr>
             <th>ID</th>
-            <th>Full name</th>
-            <th>Address</th>
-
+            <th>User ID</th>
+            <th>Client ID</th>
+            <th>Total price UAH</th>
+            <th>Date</th>
+            <th>deliveryAddr</th>
         </tr>
-        <c:forEach var="client" items="${clients}">
-            <tr align="center">
-            <td>${client.ID}</td>
-            <td>${client.fullName}</td>
-            <td>${client.address}</td>
-            <td><a href="clients/${client.ID}">edit</a></td>
-            <td><a href="clients/del/${client.ID}">delete</a></td>
+        <c:forEach var="cart" items="${carts}">
+        <tr>
+            <th>${cart.ID}</th>
+            <th>${cart.user_ID}</th>
+            <th>${cart.client_ID}</th>
+            <th>${cart.totalPriceUAH}</th>
+            <th>${cart.date}</th>
+            <th>${cart.deliveryAddr}</th>
+            <th><a href="del/${cart.ID}">delete</a></th>
         </tr>
         </c:forEach>
     </table>
-
-    <form action="/clients/new" >
-        <button>AddNewUser</button>
-    </form>
     <br>
-    <form action="/" >
+    <form action="/">
         <button>Main page </button>
     </form>
 </body>

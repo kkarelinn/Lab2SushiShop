@@ -14,33 +14,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h2>Categories of products</h2>
-<table border="2" width="60%">
+<h2>Orders</h2>
+<table border="2" cellpadding="2" width="60%">
     <tr>
         <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Date</th>
+        <th>Product ID</th>
+        <th>Cart ID</th>
+        <th>totalOrdPriceUAH</th>
+        <th>quantity</th>
     </tr>
-    <c:forEach var="category" items="${categories}">
+    <c:forEach var="order" items="${orders}">
         <tr align="center">
-            <td>${category.ID}</td>
-            <td>${category.title}</td>
-            <td>${category.description}</td>
-            <td>${category.date}</td>
-            <td><a href="categories/${category.ID}">edit</a></td>
-            <td><a href="categories/del/${category.ID}">delete</a></td>
+            <td>${order.ID}</td>
+            <td>${order.product_ID}</td>
+            <td>${order.cart_ID}</td>
+            <td>${order.totalOrdPriceUAH}</td>
+            <td>${order.quantity}</td>
+            <th><a href="orders/${order.ID}">edit</a></th>
+            <th><a href="orders/del/${order.ID}">delete</a></th>
         </tr>
     </c:forEach>
 </table>
 
-<form action="/categories/new">
-    <button>Add New Category of Products</button>
-</form>
 <br>
 <form action="/">
     <button>Main page</button>
 </form>
-
 </body>
 </html>

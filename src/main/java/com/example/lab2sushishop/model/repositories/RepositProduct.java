@@ -18,15 +18,15 @@ public class RepositProduct implements Repositor{
     public RepositProduct(Base base) {
         this.base = base;
         base.setProductList(new ArrayList<>());
-        base.insertProd(new Product("Filadelfia set", "In Filadelfia many good ingridients for exc.people", getNowDate(), 3.58));
-        base.insertProd(new Product("California roll set", "SOme description for California", getNowDate(), 5.40));
-        base.insertProd(new Product("Cheese bolls", "SOme description for Cheese", getNowDate(), 0.65));
+        base.insertProd(new Product("Filadelfia set", "In Filadelfia many good ingridients for exc.people", getNowDate(), 3.53, 1));
+        base.insertProd(new Product("California roll set", "SOme description for California", getNowDate(), 5.40, 2));
+        base.insertProd(new Product("Cheese bolls", "SOme description for Cheese", getNowDate(), 0.65, 3));
     }
 
 
     @Override
     public List<Entity> getList() {
-        return base.getProductList();
+      return base.getProductList();
     }
 
     @Override
@@ -43,9 +43,8 @@ public class RepositProduct implements Repositor{
 
     @Override
     public void update(Entity entity) {
-        Product product = (Product) entity;
-        product.setDate(getNowDate());
-        base.updateProd(product);
+        entity.setDate(getNowDate());
+        base.updateProd(entity);
     }
 
     @Override

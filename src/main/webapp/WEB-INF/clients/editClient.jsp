@@ -13,17 +13,27 @@
 </head>
 <body>
 <h2>Edit current client</h2>
-<form:form action="/clients/${client.ID}/edit" method="post" modelAttribute="client">
-    <form:label path="fullName">title: </form:label> <form:input type="text" path="fullName"/>
-    <form:label path="address">description: </form:label> <form:input type="textID" path="address"/>
+<form:form action="/clients/edit" method="post" modelAttribute="client">
+    <form:input type="hidden" path="ID"/>
+    <div>
+        <form:label path="fullName">title: </form:label>
+        <form:input type="text" path="fullName"/>
+        <form:errors path="fullName"/>
+    </div>
+    <div>
+        <form:label path="address">address: </form:label>
+        <form:input type="textID" path="address" cssStyle="width: 500px"/>
+        <form:errors path="address"/>
+    </div>
+    <div>
+        <input type="submit" value="Submit"/>
+    </div>
 
+    </form:form>
 
-    <input type="submit" value="Submit"/>
-</form:form>
-
-<br>
-<form action="/" >
-    <button>Main page </button>
-</form>
+    <br>
+    <form action="/">
+        <button>Main page</button>
+    </form>
 </body>
 </html>

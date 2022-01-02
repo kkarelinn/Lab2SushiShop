@@ -9,7 +9,10 @@ import com.example.lab2sushishop.model.repositories.Repositor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/clients")
@@ -31,12 +34,16 @@ public class ClientController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("client", repositor.show(id));
+        System.out.println("id");
         return "clients/editClient";
     }
 
-    @PostMapping("/{id}/edit")
-    public String update(@ModelAttribute("client") Client client, @PathVariable("id") int id) {
-        client.setID(id);
+    @PostMapping("/edit")
+    public String update(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+            return "clients/editClient";
+
         repositor.update(client);
         return "redirect:/clients";
     }
@@ -46,8 +53,12 @@ public class ClientController {
         return "clients/addNew";
     }
 
-    @PostMapping()
-    public String create(@ModelAttribute("client") Client client) {
+    @PostMapping("/new")
+    public String create(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+            return "clients/addNew";
+
         repositor.addNew(client);
         return "redirect:/clients";
     }

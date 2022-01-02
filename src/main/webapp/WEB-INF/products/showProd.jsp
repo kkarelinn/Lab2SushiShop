@@ -15,28 +15,32 @@
     </head>
 <body>
     <h2>Products</h2>
-    <table border="2" cellpadding="2" width="60%">
+    <table border="2" cellpadding="0.5"width="70%">
         <tr>
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
             <th>Date</th>
             <th>Price-USD</th>
+            <th>category_ID</th>
+            <th>linkProd_ID</th>
         </tr>
-        <c:forEach var="product" items="${products}">
-        <tr>
-            <th>${product.ID}</th>
-            <th>${product.title}</th>
-            <th>${product.description}</th>
-            <th>${product.date}</th>
-            <th>${product.priceUsd}</th>
+        <c:forEach var="product" items="${products}" >
+        <tr align="center">
+            <td>${product.ID}</td>
+            <td>${product.title}</td>
+            <td>${product.description}</td>
+            <td>${product.date}</td>
+            <td>${product.priceUsd}</td>
+            <td>${product.category_ID}</td>
+            <td>${product.linkProd_ID}</td>
             <th><a href="products/${product.ID}">edit</a></th>
             <th><a href="products/del/${product.ID}">delete</a></th>
         </tr>
         </c:forEach>
     </table>
 
-    <form action="/products/new" >
+    <form action="products/new">
         <button>AddNewProduct</button>
     </form>
     <br>

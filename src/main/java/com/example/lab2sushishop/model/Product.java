@@ -1,13 +1,32 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@EntityScan
+
 public class Product implements Entity{
 
     private int ID;
-    private int category_Id;
-    private int linkProd_Id;
+
+    private int category_ID;
+
+    private int linkProd_ID;
+
+    @NotBlank()
+    @Size(min=2, max=20)
     private String title;
+
+    @Size(min=3, max=50)
     private String description;
+
     private String date;
+    @Min(value = 0)
     private double priceUsd;
 
     public Product() {
@@ -16,22 +35,23 @@ public class Product implements Entity{
     public Product(String title,
                    String description,
                    String date,
-                   double priceUsd) {
-
+                   double priceUsd,
+                   int category_ID) {
+        this.category_ID = category_ID;
         this.title = title;
         this.description = description;
         this.date = date;
         this.priceUsd = priceUsd;
     }
 
-    public Product(int category_Id,
-                   int linkProd_Id,
+    public Product(int category_ID,
+                   int linkProd_ID,
                    String title,
                    String description,
                    String date,
                    double priceUsd) {
-        this.category_Id = category_Id;
-        this.linkProd_Id = linkProd_Id;
+        this.category_ID = category_ID;
+        this.linkProd_ID = linkProd_ID;
         this.title = title;
         this.description = description;
         this.date = date;
@@ -46,20 +66,20 @@ public class Product implements Entity{
         this.ID = ID;
     }
 
-    public int getCategory_Id() {
-        return category_Id;
+    public int getCategory_ID() {
+        return category_ID;
     }
 
-    public void setCategory_Id(int category_Id) {
-        this.category_Id = category_Id;
+    public void setCategory_ID(int category_ID) {
+        this.category_ID = category_ID;
     }
 
-    public int getLinkProd_Id() {
-        return linkProd_Id;
+    public int getLinkProd_ID() {
+        return linkProd_ID;
     }
 
-    public void setLinkProd_Id(int linkProd_Id) {
-        this.linkProd_Id = linkProd_Id;
+    public void setLinkProd_ID(int linkProd_ID) {
+        this.linkProd_ID = linkProd_ID;
     }
 
     public String getTitle() {
@@ -98,8 +118,8 @@ public class Product implements Entity{
     public String toString() {
         return "Product{" +
                 "ID=" + ID +
-                ", category_Id=" + category_Id +
-                ", linkProd_Id=" + linkProd_Id +
+                ", category_ID=" + category_ID +
+                ", linkProd_ID=" + linkProd_ID +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", date=" + date +

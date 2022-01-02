@@ -10,6 +10,7 @@ public class Lab2SushiShopApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Lab2SushiShopApplication.class, args);
+
     }
 
 }
