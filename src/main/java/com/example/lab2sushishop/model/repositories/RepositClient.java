@@ -1,49 +1,60 @@
 package com.example.lab2sushishop.model.repositories;
 
+
 import com.example.lab2sushishop.model.Client;
 import com.example.lab2sushishop.model.Entity;
-import com.example.lab2sushishop.model.base.Base;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class RepositClient implements Repositor{
+public class RepositClient implements Repositor {
 
-    private final Base base;
+    private final static String GET_ALL_CLIENTS = "select * from clients";
+    private final static String GET_CLIENT_BY_ID = "select * from clients where id=?";
+    private final static String DELETE_CLIENT_BY_ID = "delete from clients where id=?";
+    private final static String UPDATE_CLIENT_BY_ID = "update clients set fullname=?, address=? where id=?";
+    private final static String ADD_NEW_CLIENT = "insert into clients (fullname, address) values (?, ?)";
+
+    JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public RepositClient(Base base) {
-        this.base = base;
-        base.setClientList(new ArrayList<>());
-        base.insertClient(new Client("Client1", "Ukraine, Sumy"));
-        base.insertClient(new Client("Client2", "Ukraine, Dnepr"));
-        base.insertClient(new Client("Client3", "Ukraine, Kyiv"));
+    public RepositClient(JdbcTemplate jdbcTemplate) {
+              this.jdbcTemplate = jdbcTemplate;
+
     }
-    @Override
-    public List<Entity> getList() {
-        return base.getClientList();
+
+    public List<Client> getList() {
+        return jdbcTemplate.query(GET_ALL_CLIENTS, new BeanPropertyRowMapper<>(Client.class));
     }
 
     @Override
     public void addNew(Entity entity) {
-        base.insertClient(entity);
+        Client client = (Client) entity;
+        jdbcTemplate.update(ADD_NEW_CLIENT,
+                client.getFullName(),
+                client.getAddress());
     }
 
     @Override
     public void update(Entity entity) {
-        base.updateClient(entity);
+        Client client = (Client) entity;
+        jdbcTemplate.update(UPDATE_CLIENT_BY_ID,
+                client.getFullName(),
+                client.getAddress(),
+                client.getID());
     }
 
     @Override
     public void delete(int id) {
-        base.removeClient(id);
+        jdbcTemplate.update(DELETE_CLIENT_BY_ID, id);
     }
 
     @Override
     public Entity show(int id) {
-        return base.findClient(id);
+        return jdbcTemplate.queryForObject(GET_CLIENT_BY_ID, new BeanPropertyRowMapper<>(Client.class), id);
     }
 }

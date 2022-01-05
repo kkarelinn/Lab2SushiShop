@@ -53,7 +53,7 @@ Repositor repositor;
        return "products/addNew";
     }
 
-    @PostMapping("/new")
+    @PostMapping()
     public String create(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors())

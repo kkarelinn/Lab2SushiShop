@@ -11,10 +11,7 @@ import java.time.LocalDate;
 public class Cart implements Entity{
     private int ID;
 
-
-      private int user_ID;
-
-
+    private int user_ID;
     private int client_ID;
 
     private double totalPriceUAH;
@@ -29,15 +26,15 @@ public class Cart implements Entity{
 
     public Cart(int user_ID,
                 int client_ID,
-                double totalPriceUAH,
+                double totalPrice_uah,
                 String date,
-                String deliveryAddr,
+                String deliveryAddress,
                 String status) {
         this.user_ID = user_ID;
         this.client_ID = client_ID;
-        this.totalPriceUAH = totalPriceUAH;
+        this.totalPriceUAH = totalPrice_uah;
         this.date = date;
-        this.deliveryAddr = deliveryAddr;
+        this.deliveryAddr = deliveryAddress;
         this.status = status;
     }
 
@@ -65,11 +62,11 @@ public class Cart implements Entity{
         this.client_ID = client_ID;
     }
 
-    public double getTotalPriceUAH() {
+    public double getTotalPrice_uah() {
         return totalPriceUAH;
     }
 
-    public void setTotalPriceUAH(double totalPriceUAH) {
+    public void setTotalPrice_uah(double totalPriceUAH) {
         this.totalPriceUAH = totalPriceUAH;
     }
 
@@ -81,11 +78,11 @@ public class Cart implements Entity{
         this.date = date;
     }
 
-    public String getDeliveryAddr() {
+    public String getDeliveryAddress() {
         return deliveryAddr;
     }
 
-    public void setDeliveryAddr(String deliveryAddr) {
+    public void setDeliveryAddress(String deliveryAddr) {
         this.deliveryAddr = deliveryAddr;
     }
 

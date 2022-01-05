@@ -14,7 +14,7 @@
 </head>
 <body>
 <p> ADD new product</p>
-<form:form  action="/new" method="post" modelAttribute="product">
+<form:form  action="/products" method="post" modelAttribute="product">
     <div>
         <form:label path="title">title: </form:label>
         <form:input type="text" path="title"/>
@@ -29,6 +29,11 @@
         <form:label path="priceUsd">price-usd: </form:label>
         <form:input type="double" path="priceUsd"/>
         <form:errors path="priceUsd"/>
+    </div>
+    <div>
+        <form:label path="category_ID">category_ID: </form:label>
+        <form:input type="text" path="category_ID"/>
+        <form:errors path="category_ID"/>
     </div>
     <div>
         <input type="submit" value="Добавить"/>

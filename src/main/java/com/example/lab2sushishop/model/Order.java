@@ -1,32 +1,29 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.Min;
 
 
 @Component
+@EntityScan
 public class Order implements Entity {
     private int ID;
 
     private int product_ID;
-
-
     private int cart_ID;
-
-    private double totalOrdPriceUAH;
+    private double total_price_uah;
 
     @Min(value = 1)
     private int quantity;
-
     public Order() {
     }
 
-    public Order(int product_ID, int cart_ID, double totalOrdPriceUAH, int quantity) {
+    public Order(int product_ID, int cart_ID, double total_price_uah, int quantity) {
 
         this.product_ID = product_ID;
         this.cart_ID = cart_ID;
-        this.totalOrdPriceUAH = totalOrdPriceUAH;
+        this.total_price_uah = total_price_uah;
         this.quantity = quantity;
     }
 
@@ -56,12 +53,12 @@ public class Order implements Entity {
         this.cart_ID = cart_ID;
     }
 
-    public double getTotalOrdPriceUAH() {
-        return totalOrdPriceUAH;
+    public double getTotal_price_uah() {
+        return total_price_uah;
     }
 
-    public void setTotalOrdPriceUAH(double totalOrdPriceUAH) {
-        this.totalOrdPriceUAH = totalOrdPriceUAH;
+    public void setTotal_price_uah(double total_price_uah) {
+        this.total_price_uah = total_price_uah;
     }
 
     public int getQuantity() {
@@ -78,7 +75,7 @@ public class Order implements Entity {
                 "ID=" + ID +
                 ", product_ID=" + product_ID +
                 ", cart_ID=" + cart_ID +
-                ", totalOrdPriceUAH=" + totalOrdPriceUAH +
+                ", total_price_uah=" + total_price_uah +
                 ", quantity=" + quantity +
                 '}';
     }

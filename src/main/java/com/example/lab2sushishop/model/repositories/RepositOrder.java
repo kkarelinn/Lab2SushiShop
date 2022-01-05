@@ -1,46 +1,50 @@
 package com.example.lab2sushishop.model.repositories;
 
 import com.example.lab2sushishop.model.Entity;
-import com.example.lab2sushishop.model.base.Base;
+import com.example.lab2sushishop.model.Order;
+import com.example.lab2sushishop.model.UserAccess;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class RepositOrder implements Repositor{
+    private final static UserAccess DEFAULT_ROLE = UserAccess.DEFAULT;
 
-    private final Base base;
+    private final static String GET_ALL_ORDERS = "select * from orders";
+    private final static String GET_ORDER_BY_ID = "select * from orders where id=?";
+    private final static String DELETE_ORDER_BY_ID = "delete from orders where id=?";
+
+    private final JdbcTemplate jdbcTemplate;
+
 
     @Autowired
-    public RepositOrder(Base base) {
-        //no any new order at start
-        this.base = base;
-        base.setOrderList(new ArrayList<>());
+    public RepositOrder(JdbcTemplate jdbcTemplate) {
+              this.jdbcTemplate = jdbcTemplate;
     }
     @Override
     public List<?> getList() {
-        return base.getOrderList();
+        return jdbcTemplate.query(GET_ALL_ORDERS, new BeanPropertyRowMapper<>(Order.class));
     }
 
     @Override
     public void addNew(Entity entity) {
-
     }
 
     @Override
     public void update(Entity entity) {
-
     }
 
     @Override
     public void delete(int id) {
-
+        jdbcTemplate.update(DELETE_ORDER_BY_ID, id);
     }
 
     @Override
     public Entity show(int id) {
-        return null;
+        return jdbcTemplate.queryForObject(GET_ORDER_BY_ID, new BeanPropertyRowMapper<>(Order.class), id);
     }
 }

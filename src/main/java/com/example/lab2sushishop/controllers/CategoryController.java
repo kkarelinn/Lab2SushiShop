@@ -8,7 +8,10 @@ import com.example.lab2sushishop.model.repositories.Repositor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -35,8 +38,10 @@ public class CategoryController {
     }
 
     @PostMapping("/edit")
-    public String update(@ModelAttribute("category") Category category)
+    public String update(@ModelAttribute("category") @Valid Category category, BindingResult bindingResult)
     {
+        if (bindingResult.hasErrors())
+            return "categories/editCat";
         repositor.update(category);
         return "redirect:/categories";
     }
@@ -47,7 +52,10 @@ public class CategoryController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("category") Category category) {
+    public String create(@ModelAttribute("category") @Valid Category category, BindingResult bindingResult)
+    {
+        if (bindingResult.hasErrors())
+            return "categories/addNew";
         repositor.addNew(category);
         return "redirect:/categories";
     }

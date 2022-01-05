@@ -17,7 +17,7 @@
 <form:form action="/clients/new" method="post" modelAttribute="client">
 
     <div>
-        <form:label path="fullName">title: </form:label>
+        <form:label path="fullName">full Name: </form:label>
         <form:input type="text" path="fullName"/>
         <form:errors path="fullName"/>
     </div>

@@ -29,9 +29,9 @@
             <th>${cart.ID}</th>
             <th>${cart.user_ID}</th>
             <th>${cart.client_ID}</th>
-            <th>${cart.totalPriceUAH}</th>
+            <th>${cart.totalPrice_uah}</th>
             <th>${cart.date}</th>
-            <th>${cart.deliveryAddr}</th>
+            <th>${cart.deliveryAddress}</th>
             <th><a href="del/${cart.ID}">delete</a></th>
         </tr>
         </c:forEach>

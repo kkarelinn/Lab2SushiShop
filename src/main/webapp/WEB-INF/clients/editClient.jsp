@@ -16,7 +16,7 @@
 <form:form action="/clients/edit" method="post" modelAttribute="client">
     <form:input type="hidden" path="ID"/>
     <div>
-        <form:label path="fullName">title: </form:label>
+        <form:label path="fullName">full Name: </form:label>
         <form:input type="text" path="fullName"/>
         <form:errors path="fullName"/>
     </div>

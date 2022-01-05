@@ -25,6 +25,7 @@
             <th>ID</th>
             <th>Продукт</th>
             <th>Категория</th>
+            <th>Цена USD</th>
             <th>Количество</th>
             <th>Сумма ГРН</th>
 
@@ -33,13 +34,14 @@
             <tr align="center">
                 <td>${crt[0]}</td>
                 <td>${crt[1]}</td>
-                <td>${crt[2]}</td>
+                <td>${crt[3]}</td>
+                <td>${crt[4]}</td>
                 <td>${crt[5]}</td>
                 <td>${crt[6]}</td>
             </tr>
         </c:forEach>
     </table>
-    <h3>Общая сумма: ${cart.totalPriceUAH}</h3>
+    <h3>Общая сумма: ${cart.totalPrice_uah}</h3>
     <form action="/carts/details" method="get">
         <button>Оформить</button>
     </form>
@@ -64,15 +66,15 @@
             <td>${mass[0]}</td>
             <td>${mass[1]}</td>
             <td>${mass[2]}</td>
-            <td>${mass[4]}</td>
             <td>${mass[3]}</td>
+            <td>${mass[4]}</td>
             <td><form:form action="/carts/add" method="post" modelAttribute="order">
                 <form:label path="quantity"> К-во: </form:label>
                 <form:input type="int" cssStyle="width: 40"  path="quantity"/>
                 <form:errors path="quantity"/>
 
                 <form:input type="hidden" path="product_ID" value="${mass[0]}"/>
-                <input type="hidden" name="priceUsd" value="${mass[3]}"/>
+                <input type="hidden" name="priceUsd" value="${mass[4]}"/>
                 <input type="submit" value="Добавить"/>
             </form:form></td>
 

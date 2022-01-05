@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Component
@@ -65,8 +64,8 @@ public class User implements Entity{
         return accessRole;
     }
 
-    public void setAccessRole(String accessRole) {
-        this.accessRole = accessRole;
+    public void setAccessRole(UserAccess accessRole) {
+        this.accessRole = accessRole.getUserRole();
     }
 
     @Override

@@ -28,10 +28,9 @@
             <td>${order.ID}</td>
             <td>${order.product_ID}</td>
             <td>${order.cart_ID}</td>
-            <td>${order.totalOrdPriceUAH}</td>
+            <td>${order.total_price_uah}</td>
             <td>${order.quantity}</td>
-            <th><a href="orders/${order.ID}">edit</a></th>
-            <th><a href="orders/del/${order.ID}">delete</a></th>
+            <th><a href="/orders/del/${order.ID}">delete</a></th>
         </tr>
     </c:forEach>
 </table>

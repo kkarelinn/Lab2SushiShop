@@ -15,8 +15,8 @@
 <body>
 <p> ADD Cart`s details</p>
 <form:form  action="/carts/newCart" method="post" modelAttribute="cart">
-    <form:label path="deliveryAddr">delivery Address: </form:label> <form:input type="text" path="deliveryAddr"/>
-    <form:errors path="deliveryAddr"/>
+    <form:label path="deliveryAddress">delivery Address: </form:label> <form:input type="text" path="deliveryAddress"/>
+    <form:errors path="deliveryAddress"/>
     <form:label path="client_ID">client_ID: </form:label> <form:input type="int" path="client_ID"/>
     <form:errors path="client_ID"/>
     <input type="submit" value="Submit"/>

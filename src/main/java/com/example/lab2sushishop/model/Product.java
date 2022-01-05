@@ -3,13 +3,12 @@ package com.example.lab2sushishop.model;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @EntityScan
-
 public class Product implements Entity{
 
     private int ID;

@@ -28,14 +28,14 @@
         <tr>
             <th>${ord[1]}</th>
             <th>${ord[2]}</th>
-            <th>${ord[3]}</th>
+            <th>${ord[4]}</th>
             <th>${ord[5]}</th>
             <th>${ord[6]}</th>
         </tr>
     </c:forEach>
 </table>
-<h3 >Total: ${cartAp.totalPriceUAH}</h3>
-<h3>Delivery address: ${cartAp.deliveryAddr}</h3>
+<h3 >Total: ${cartAp.totalPrice_uah}</h3>
+<h3>Delivery address: ${cartAp.deliveryAddress}</h3>
 <h3>Client name: ${client.fullName}</h3>
 
 <br>

@@ -12,6 +12,9 @@ import java.util.List;
 public interface Repositor {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+//    void connect();
+//    void disconnect();
+
     List<?> getList();
     void addNew(Entity entity);
     void update(Entity entity);
