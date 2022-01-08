@@ -23,19 +23,19 @@
             <th>Date</th>
             <th>Price-USD</th>
             <th>category_ID</th>
-            <th>linkProd_ID</th>
+            <th>linkProd</th>
         </tr>
-        <c:forEach var="product" items="${products}" >
+        <c:forEach var="product" items="${prod_cat}" >
         <tr align="center">
-            <td>${product.ID}</td>
-            <td>${product.title}</td>
-            <td>${product.description}</td>
-            <td>${product.date}</td>
-            <td>${product.priceUsd}</td>
-            <td>${product.category_ID}</td>
-            <td>${product.linkProd_ID}</td>
-            <th><a href="products/${product.ID}">edit</a></th>
-            <th><a href="products/del/${product.ID}">delete</a></th>
+            <td>${product[0]}</td>
+            <td>${product[1]}</td>
+            <td>${product[2]}</td>
+            <td>${product[3]}</td>
+            <td>${product[5]}</td>
+            <td>${product[4]}</td>
+            <td>${product[6]}</td>
+            <th><a href="products/${product[0]}">edit</a></th>
+            <th><a href="products/del/${product[0]}">delete</a></th>
         </tr>
         </c:forEach>
     </table>

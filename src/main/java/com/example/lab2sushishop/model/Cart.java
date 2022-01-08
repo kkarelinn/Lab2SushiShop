@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 
 @Component
 @Scope("prototype")
-public class Cart implements Entity{
+public class Cart implements Entity {
+
     private int ID;
 
     private int user_ID;

@@ -14,10 +14,15 @@
 <body>
 <h2>Edit current user</h2>
 <form:form action="/users/${user.ID}/edit" method="post" modelAttribute="user">
-    <form:label path="fullName">title: </form:label> <form:input type="text" path="fullName"/>
-    <form:label path="manager">description: </form:label> <form:input type="int" path="manager"/>
-    <form:label path="accessRole">access Role: </form:label> <form:input type="text" path="accessRole"/>
-
+    <form:label path="fullName">full Name: </form:label> <form:input type="text" path="fullName"/>
+    <label>manager:</label>
+    <form:select path="manager">
+        <form:options items="${userMan}"  itemLabel="fullName" itemValue="ID"/>
+    </form:select>
+    <label>role:</label>
+    <form:select path="accessRole">
+        <form:options items="${roles}"  itemLabel="name" itemValue="name"/>
+    </form:select>
     <input type="submit" value="Submit"/>
 </form:form>
 

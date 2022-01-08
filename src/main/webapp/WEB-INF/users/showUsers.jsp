@@ -19,18 +19,18 @@
         <tr>
             <th>ID</th>
             <th>Full name</th>
-            <th>my manager ID</th>
+            <th>my manager</th>
             <th>Access</th>
 
         </tr>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="user" items="${userStr}">
         <tr>
-            <th>${user.ID}</th>
-            <th>${user.fullName}</th>
-            <th>${user.manager}</th>
-            <th>${user.accessRole}</th>
-            <th><a href="users/${user.ID}">edit</a></th>
-            <th><a href="users/del/${user.ID}">delete</a></th>
+            <td>${user[0]}</td>
+            <td>${user[1]}</td>
+            <td>${user[2]}</td>
+            <td>${user[3]}</td>
+            <td><a href="users/${user[0]}">edit</a></td>
+            <td><a href="users/del/${user[0]}">delete</a></td>
         </tr>
         </c:forEach>
     </table>

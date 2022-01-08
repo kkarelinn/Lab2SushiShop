@@ -1,10 +1,14 @@
 package com.example.lab2sushishop.model;
 
+
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class Category implements Entity{
+@Component
+public class Category implements Entity {
+
     private int ID;
     @NotBlank
     @Size(min=2, max=20)

@@ -1,4 +1,5 @@
 package com.example.lab2sushishop.controllers;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,5 +14,4 @@ public class MainController {
         model.addAttribute("main", "Sushi SHOP");
         return "index";
     }
-
 }

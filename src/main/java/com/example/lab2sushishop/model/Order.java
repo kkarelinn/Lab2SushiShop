@@ -2,12 +2,13 @@ package com.example.lab2sushishop.model;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.Min;
 
 
 @Component
-@EntityScan
 public class Order implements Entity {
+
     private int ID;
 
     private int product_ID;

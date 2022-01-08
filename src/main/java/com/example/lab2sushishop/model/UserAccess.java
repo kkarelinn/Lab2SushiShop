@@ -1,19 +1,11 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.stereotype.Component;
+
 public enum UserAccess {
-    ADMIN("admin"), MANAGER("manager"), EMPLOYEE("employee"), DEFAULT("customer");
-
-   private String userRole;
-
-
-  UserAccess(String userRole) {
-
-        this.userRole = userRole;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
+    ADMIN, MANAGER, EMPLOYEE, CUSTOMER;
 
 
 }

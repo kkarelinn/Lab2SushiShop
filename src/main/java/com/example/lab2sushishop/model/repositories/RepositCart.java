@@ -5,15 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Repository
 public class RepositCart implements Repositor {
 
     private final static String GET_ALL_CARTS = "select * from carts";
     private final static String GET_ALL_PRODUCTS = "select * from products";
+    private final static String GET_ALL_CLIENTS = "select * from clients";
     private final static String GET_CART_BY_ID = "select * from carts where id=?";
     private final static String DELETE_CART_BY_ID = "delete from carts where id=?";
     private final static String DELETE_ORDERS_BY_CART_ID = "delete from orders where cart_ID=?";
@@ -46,9 +49,9 @@ public class RepositCart implements Repositor {
     }
 
 
-//-------------------
+// get multi List<String[]> from different tables
 
-    public List<String[]> getListProductsString() {
+    public List<String[]> getProdsWithCatString() {
         List<String[]> getProdsWithCatString = new ArrayList<>();
         List<Product> prodList = jdbcTemplate.query(GET_ALL_PRODUCTS, new BeanPropertyRowMapper<>(Product.class));
         for (Product prod : prodList) {
@@ -94,9 +97,6 @@ public class RepositCart implements Repositor {
     public int getLastCartID() {
         return getList().stream().mapToInt(c -> ((Cart) c).getID()).max().orElse(0);
     }
-//    public List<Product> getProductList() {
-//        return jdbcTemplate.query(GET_ALL_PRODUCTS, new BeanPropertyRowMapper<>(Product.class));
-//    }
 
     //------------------
 
@@ -141,8 +141,9 @@ public class RepositCart implements Repositor {
 
     @Override
     public void delete(int id) {
-        jdbcTemplate.update(DELETE_CART_BY_ID, id);
         jdbcTemplate.update(DELETE_ORDERS_BY_CART_ID, id);
+        jdbcTemplate.update(DELETE_CART_BY_ID, id);
+
 
     }
 
@@ -152,4 +153,7 @@ public class RepositCart implements Repositor {
     }
 
 
+    public List<?> getClientList() {
+        return jdbcTemplate.query(GET_ALL_CLIENTS, new BeanPropertyRowMapper<>(Client.class));
+    }
 }

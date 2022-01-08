@@ -16,8 +16,14 @@
 <p> ADD new user</p>
 <form:form  action="/users" method="post" modelAttribute="user">
     <form:label path="fullName">fullName: </form:label> <form:input type="text" path="fullName"/>
-    <form:label path="manager">manager_ID: </form:label> <form:input type="int" path="manager"/>
-    <form:label path="accessRole">access Role: </form:label> <form:input type="text" path="accessRole"/>
+    <label>manager:</label>
+    <form:select path="manager">
+        <form:options items="${userMan}"  itemLabel="fullName" itemValue="ID"/>
+    </form:select>
+    <label>role:</label>
+    <form:select path="accessRole">
+        <form:options items="${roles}"  itemLabel="name" itemValue="name"/>
+    </form:select>
     <input type="submit" value="Submit"/>
 </form:form>
 <br>

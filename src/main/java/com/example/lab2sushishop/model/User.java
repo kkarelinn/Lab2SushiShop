@@ -1,13 +1,14 @@
 package com.example.lab2sushishop.model;
 
 import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Component
-public class User implements Entity{
+
+public class User implements Entity {
+
     private int ID;
 
     @NotBlank
@@ -25,10 +26,10 @@ public class User implements Entity{
        super();
     }
 
-    public User(String fullName, int manager, UserAccess role) {
+    public User(String fullName, int manager, String role) {
         this.fullName = fullName;
         this.manager = manager;
-        this.accessRole = role.getUserRole();
+        this.accessRole = role;
     }
 
     public int getID() {
@@ -64,8 +65,8 @@ public class User implements Entity{
         return accessRole;
     }
 
-    public void setAccessRole(UserAccess accessRole) {
-        this.accessRole = accessRole.getUserRole();
+    public void setAccessRole(String accessRole) {
+        this.accessRole = accessRole;
     }
 
     @Override

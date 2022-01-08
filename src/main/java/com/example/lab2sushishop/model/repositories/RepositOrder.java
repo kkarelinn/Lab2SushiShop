@@ -2,17 +2,17 @@ package com.example.lab2sushishop.model.repositories;
 
 import com.example.lab2sushishop.model.Entity;
 import com.example.lab2sushishop.model.Order;
-import com.example.lab2sushishop.model.UserAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Component
+@Repository
 public class RepositOrder implements Repositor{
-    private final static UserAccess DEFAULT_ROLE = UserAccess.DEFAULT;
 
     private final static String GET_ALL_ORDERS = "select * from orders";
     private final static String GET_ORDER_BY_ID = "select * from orders where id=?";

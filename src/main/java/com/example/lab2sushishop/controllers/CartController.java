@@ -41,7 +41,7 @@ public class CartController {
         updateCart();
         model.addAttribute("cart", tempCart);
         model.addAttribute("cartStr", getProductsFromTempCart());
-        model.addAttribute("products", repositor.getListProductsString());
+        model.addAttribute("products", repositor.getProdsWithCatString());
         model.addAttribute("order", order);
 
         return "cart/showList";
@@ -52,10 +52,7 @@ public class CartController {
 
         if (bindingResult.hasErrors())
             return "redirect:/carts";
-//        System.out.println(order);
-//        System.out.println(priceUsd);
         order.setTotal_price_uah(Math.round(priceUsd * COURSE_USD * order.getQuantity() * 100) / 100d);
-        System.out.println("Order: " + order);
         tempOrderList.add(order);
         return "redirect:/carts";
     }
@@ -76,6 +73,7 @@ public class CartController {
     @GetMapping("/details")
     public String addDetails(Model model) {
         model.addAttribute("cart", tempCart);
+        model.addAttribute("clients", repositor.getClientList());
         return "cart/addNew";
     }
     @Loging
@@ -85,16 +83,12 @@ public class CartController {
             return "cart/addNew";
 
         cart.setTotalPrice_uah(tempCart.getTotalPrice_uah());
-//        System.out.println("Добавляем корзину с номером - "+ cart.getID()+ "  и общей суммой "+cart.getTotalPrice_uah());
         repositor.addNew(cart);
         int cart_ID = repositor.getLastCartID();
-
         for (Order order: tempOrderList) {
             order.setCart_ID(cart_ID);
-//            System.out.println("order"+ order);
             repositor.addNewOrder(order);
         }
-//        System.out.println("cart for approve " + cart);
         model.addAttribute("cartAp", cart);
         model.addAttribute("orders", repositor.getLinesFromCartString(cart_ID));
         model.addAttribute("client", repositor.getClient(cart.getClient_ID()));

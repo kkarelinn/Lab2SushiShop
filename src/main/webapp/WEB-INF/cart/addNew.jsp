@@ -17,8 +17,12 @@
 <form:form  action="/carts/newCart" method="post" modelAttribute="cart">
     <form:label path="deliveryAddress">delivery Address: </form:label> <form:input type="text" path="deliveryAddress"/>
     <form:errors path="deliveryAddress"/>
-    <form:label path="client_ID">client_ID: </form:label> <form:input type="int" path="client_ID"/>
-    <form:errors path="client_ID"/>
+    <label>Client:</label>
+    <form:select path="client_ID">
+        <form:options items="${clients}"  itemLabel="fullName" itemValue="ID"/>
+    </form:select>
+
+
     <input type="submit" value="Submit"/>
 </form:form>
 <br>

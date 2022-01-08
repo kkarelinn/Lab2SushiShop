@@ -15,17 +15,19 @@
 <body>
 <p> ADD new client</p>
 <form:form action="/clients/new" method="post" modelAttribute="client">
-
+    <br>
     <div>
         <form:label path="fullName">full Name: </form:label>
         <form:input type="text" path="fullName"/>
         <form:errors path="fullName"/>
     </div>
+    <br>
     <div>
         <form:label path="address">address: </form:label>
         <form:input type="textID" path="address" cssStyle="width: 500px"/>
         <form:errors path="address"/>
     </div>
+    <br>
     <div>
         <input type="submit" value="Submit"/>
     </div>

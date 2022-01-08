@@ -1,34 +1,44 @@
 package com.example.lab2sushishop.controllers;
 
 
+
 import com.example.lab2sushishop.model.User;
+import com.example.lab2sushishop.model.UserAccess;
 import com.example.lab2sushishop.model.repositories.RepositUser;
-import com.example.lab2sushishop.model.repositories.Repositor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
-    final Repositor repositor;
+    final RepositUser repositor;
+
 
     @Autowired
     public UserController(RepositUser repositor) {
         this.repositor = repositor;
+
     }
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("users", repositor.getList());
+        model.addAttribute("userStr", repositor.getUsersManString());
         return "users/showUsers";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", repositor.show(id));
+        model.addAttribute("user", repositor.show(id) );
+        model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
+        List<User> listWithEmpty = repositor.getList();
+        listWithEmpty.add(new User());
+        model.addAttribute("userMan", listWithEmpty);
         return "users/editUser";
     }
 
@@ -40,7 +50,12 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String newUser(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
+        List<User> listWithEmpty = repositor.getList();
+        listWithEmpty.add(user);
+        model.addAttribute("userMan", listWithEmpty);
+
         return "users/addNew";
     }
 

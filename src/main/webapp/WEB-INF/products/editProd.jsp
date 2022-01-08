@@ -17,31 +17,37 @@
 <form:form action="/products/edit" method="post" modelAttribute="product">
 
     <form:input type="hidden" path="ID"/>
-
+    <br>
     <div>
         <form:label path="title">title: </form:label>
         <form:input type="text" path="title"/>
         <form:errors path="title"/>
     </div>
+    <br>
     <div>
         <form:label path="description">description: </form:label>
         <form:input type="text" path="description" cssStyle="width: 500px"/>
         <form:errors path="description"/>
     </div>
+    <br>
     <div>
         <form:label path="priceUsd">price-usd: </form:label>
         <form:input type="double" path="priceUsd"/>
         <form:errors path="priceUsd"/>
     </div>
+    <br>
     <div>
-        <form:label path="priceUsd">category_ID: </form:label>
-        <form:input type="int" path="category_ID"/>
-        <form:errors path="category_ID"/>
+        <label>Category:</label>
+        <form:select path="category_ID">
+            <form:options items="${cats}"  itemLabel="title" itemValue="ID"/>
+        </form:select>
     </div>
+    <br>
     <div>
-        <form:label path="priceUsd">linkProd_ID: </form:label>
-        <form:input type="int" path="linkProd_ID"/>
-        <form:errors path="linkProd_ID"/>
+        <label>LinkProduct:</label>
+        <form:select path="linkProd_ID">
+            <form:options items="${prods}"  itemLabel="title" itemValue="ID"/>
+        </form:select>
     </div>
     <br>
     <div>
