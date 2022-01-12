@@ -23,9 +23,7 @@ public class CartController {
 
     private final static double COURSE_USD = 27.55;
     RepositCart repositor;
-
     final Order order;
-
     Cart tempCart;
     List<Order> tempOrderList;
 
@@ -39,36 +37,36 @@ public class CartController {
     @GetMapping()
     public String index(Model model) {
         updateCart();
-        model.addAttribute("cart", tempCart);
-        model.addAttribute("cartStr", getProductsFromTempCart());
-        model.addAttribute("products", repositor.getProdsWithCatString());
+        model.addAttribute("tempOrders", tempOrderList);
+        model.addAttribute("tempCart", tempCart);
+        model.addAttribute("products", repositor.getProdList());
         model.addAttribute("order", order);
 
         return "cart/showList";
     }
     @Loging
     @PostMapping("/add")
-    public String update(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult, @RequestParam("priceUsd") double priceUsd) {
+    public String update(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult,
+                         @RequestParam("priceUsd") double priceUsd,
+                         @RequestParam("prod_id") int prod_id,
+                         @RequestParam("cat_id") int cat_id) {
 
         if (bindingResult.hasErrors())
             return "redirect:/carts";
+        order.setProduct(repositor.getProdById(prod_id));
+        order.getProduct().setCategory(repositor.getCatById(cat_id));
         order.setTotal_price_uah(Math.round(priceUsd * COURSE_USD * order.getQuantity() * 100) / 100d);
         tempOrderList.add(order);
         return "redirect:/carts";
     }
-
-    private List<String[]> getProductsFromTempCart() {
-        List<String[]> cartStr = new ArrayList<>();
+/*
+    private List<Product> getProductsFromTempCart() {
+        List<Product> prodInCart = new ArrayList<>();
         for (Order ord : tempOrderList) {
-            String[] str = repositor.getProdCatString(ord.getProduct_ID());
-            String[] full = new String[str.length + 2];
-            System.arraycopy(str, 0, full, 0, str.length);
-            full[full.length - 2] = ord.getQuantity() + "";
-            full[full.length - 1] = ord.getTotal_price_uah() + "";
-            cartStr.add(full);
+            prodInCart.add(ord.getProduct());
         }
-        return cartStr;
-    }
+        return prodInCart;
+    }*/
     @Loging
     @GetMapping("/details")
     public String addDetails(Model model) {
@@ -89,12 +87,14 @@ public class CartController {
             order.setCart_ID(cart_ID);
             repositor.addNewOrder(order);
         }
-        model.addAttribute("cartAp", cart);
-        model.addAttribute("orders", repositor.getLinesFromCartString(cart_ID));
+        model.addAttribute("tempOrders", tempOrderList);
+        model.addAttribute("cart", cart);
+        System.out.println(repositor.getClient(cart.getClient_ID()));
         model.addAttribute("client", repositor.getClient(cart.getClient_ID()));
 
         return "cart/approve";
     }
+
     @Loging
     @GetMapping("/del")
     public String delete() {
@@ -103,6 +103,7 @@ public class CartController {
         tempOrderList = null;
         return "redirect:/carts";
     }
+
     @Loging
     @GetMapping("/del/{id}")
     public String delete(@PathVariable("id") int id) {
@@ -113,8 +114,8 @@ public class CartController {
     @Loging
     @GetMapping("/allcarts")
     public String showCarts(Model model) {
-        List<?> list = repositor.getList();
-        list.forEach(System.out::println);
+//        List<?> list = repositor.getList();
+//        list.forEach(System.out::println);
         model.addAttribute("carts", repositor.getList());
 
         return "cart/showAll";

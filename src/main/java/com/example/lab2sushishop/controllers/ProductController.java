@@ -1,6 +1,7 @@
 package com.example.lab2sushishop.controllers;
 
 
+import com.example.lab2sushishop.model.Category;
 import com.example.lab2sushishop.model.Product;
 import com.example.lab2sushishop.model.repositories.RepositProduct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ RepositProduct repositor;
     }
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("prod_cat", repositor.getProdsWithCatString());
+            model.addAttribute("prodList", repositor.getList());
         return "products/showProd";
     }
 
@@ -35,10 +36,7 @@ RepositProduct repositor;
     public String show(@ModelAttribute("product") Product product, @PathVariable("id") int id, Model model) {
 
        model.addAttribute("product", repositor.show(id));
-        model.addAttribute("cats", repositor.getListCats());
-        List<Product> listWithEmpty = repositor.getList();
-        listWithEmpty.add(product);
-        model.addAttribute("prods", listWithEmpty);
+
         return "products/editProd";
     }
 
@@ -48,16 +46,15 @@ RepositProduct repositor;
         if (bindingResult.hasErrors())
             return "products/editProd";
 
+        product.setLinkProduct(repositor.show(product.getLinkprod_id()));
+        product.setCategory(repositor.getCatById(product.getCategory_id()));
+
         repositor.update(product);
         return "redirect:/products";
     }
 
     @GetMapping("/new")
     public String newProduct(@ModelAttribute("product") Product product, Model model) {
-        model.addAttribute("cats", repositor.getListCats());
-        List<Product> listWithEmpty = repositor.getList();
-        listWithEmpty.add(product);
-        model.addAttribute("prods", listWithEmpty);
        return "products/addNew";
     }
 
@@ -66,9 +63,24 @@ RepositProduct repositor;
 
         if (bindingResult.hasErrors())
             return "products/addNew";
+        System.out.println(product);
+        product.setLinkProduct(repositor.show(product.getLinkprod_id()));
+        product.setCategory(repositor.getCatById(product.getCategory_id()));
         repositor.addNew(product);
         return "redirect:/products";
     }
+    @ModelAttribute("cats")
+    public List<Category> categoryList(){
+        return repositor.getListCats();
+    }
+    @ModelAttribute("prods")
+    public List<Product> listWithEmpty(){
+        List<Product> listWithEmpty = repositor.getList();
+        listWithEmpty.add(new Product());
+        return listWithEmpty;
+    }
+
+
 
    @GetMapping("/del/{id}")
     public String delete(@PathVariable("id") int id) {

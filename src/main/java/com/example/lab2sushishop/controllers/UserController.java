@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("userStr", repositor.getUsersManString());
+        model.addAttribute("users", repositor.getList());
         return "users/showUsers";
     }
 
@@ -36,9 +36,6 @@ public class UserController {
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", repositor.show(id) );
         model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
-        List<User> listWithEmpty = repositor.getList();
-        listWithEmpty.add(new User());
-        model.addAttribute("userMan", listWithEmpty);
         return "users/editUser";
     }
 
@@ -52,9 +49,6 @@ public class UserController {
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
-        List<User> listWithEmpty = repositor.getList();
-        listWithEmpty.add(user);
-        model.addAttribute("userMan", listWithEmpty);
 
         return "users/addNew";
     }
@@ -70,4 +64,12 @@ public class UserController {
         repositor.delete(id);
         return "redirect:/users";
     }
+
+    @ModelAttribute("userMan")
+    public List<User> listWithEmpty() {
+        List<User> listWithEmpty = repositor.getList();
+        listWithEmpty.add(new User());
+        return listWithEmpty;
+    }
+
 }

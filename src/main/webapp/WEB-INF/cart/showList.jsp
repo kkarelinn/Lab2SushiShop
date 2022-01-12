@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<c:if test="${cartStr.size() > 0}">
+<c:if test="${tempOrders.size() > 0}">
     <h2>Ваша корзина</h2>
     <table border="2" cellpadding="2" width="60%">
         <tr>
@@ -30,18 +30,18 @@
             <th>Сумма ГРН</th>
 
         </tr>
-        <c:forEach var="crt" items="${cartStr}">
+        <c:forEach var="ord" items="${tempOrders}">
             <tr align="center">
-                <td>${crt[0]}</td>
-                <td>${crt[1]}</td>
-                <td>${crt[3]}</td>
-                <td>${crt[4]}</td>
-                <td>${crt[5]}</td>
-                <td>${crt[6]}</td>
+                <td>${ord.product.ID}</td>
+                <td>${ord.product.title}</td>
+                <td>${ord.product.category.title}</td>
+                <td>${ord.product.priceUsd}</td>
+                <td>${ord.quantity}</td>
+                <td>${ord.total_price_uah}</td>
             </tr>
         </c:forEach>
     </table>
-    <h3>Общая сумма: ${cart.totalPrice_uah}</h3>
+    <h3>Общая сумма: ${tempCart.totalPrice_uah} грн</h3>
     <form action="/carts/details" method="get">
         <button>Оформить</button>
     </form>
@@ -63,19 +63,21 @@
         </tr>
         <c:forEach var="mass" items="${products}">
       <tr align="center">
-            <td>${mass[0]}</td>
-            <td>${mass[1]}</td>
-            <td>${mass[2]}</td>
-            <td>${mass[3]}</td>
-            <td>${mass[4]}</td>
-            <td><form:form action="/carts/add" method="post" modelAttribute="order">
-                <form:label path="quantity"> К-во: </form:label>
-                <form:input type="int" cssStyle="width: 40"  path="quantity"/>
-                <form:errors path="quantity"/>
+          <td>${mass.ID}</td>
+          <td>${mass.title}</td>
+          <td>${mass.description}</td>
+          <td>${mass.category.title}</td>
+          <td>${mass.priceUsd}</td>
+          <td><form:form action="/carts/add" method="post" modelAttribute="order">
+              <form:label path="quantity" > К-во: </form:label>
+              <form:input type="int" cssStyle="width: 40" path="quantity"  />
+              <form:errors path="quantity"/>
 
-                <form:input type="hidden" path="product_ID" value="${mass[0]}"/>
-                <input type="hidden" name="priceUsd" value="${mass[4]}"/>
-                <input type="submit" value="Добавить"/>
+              <form:input type="hidden" path="product_ID" value="${mass.ID}"/>
+              <input type="hidden" name="priceUsd" value="${mass.priceUsd}"/>
+              <input type="hidden" name="prod_id" value="${mass.ID}"/>
+              <input type="hidden" name="cat_id" value="${mass.category_id}"/>
+              <input type="submit" value="Добавить"/>
             </form:form></td>
 
             </c:forEach>

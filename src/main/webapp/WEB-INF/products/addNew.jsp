@@ -36,15 +36,15 @@
     </div>
     <br>
     <div>
-    <label>Category:</label>
-    <form:select path="category_ID">
-        <form:options items="${cats}"  itemLabel="title" itemValue="ID"/>
-    </form:select>
+        <label>Category:</label>
+        <form:select path="category_id">
+            <form:options items="${cats}"  itemLabel="title" itemValue="ID"/>
+        </form:select>
     </div>
     <br>
     <div>
         <label>LinkProduct:</label>
-        <form:select path="linkProd_ID">
+        <form:select path="linkprod_id">
             <form:options items="${prods}"  itemLabel="title" itemValue="ID"/>
         </form:select>
     </div>

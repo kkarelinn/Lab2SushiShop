@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class RepositOrder implements Repositor{
 
-    private final static String GET_ALL_ORDERS = "select * from orders";
+    private final static String GET_ALL_ORDERS = "select * from orders order by id";
     private final static String GET_ORDER_BY_ID = "select * from orders where id=?";
     private final static String DELETE_ORDER_BY_ID = "delete from orders where id=?";
 

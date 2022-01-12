@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class RepositClient implements Repositor {
 
-    private final static String GET_ALL_CLIENTS = "select * from clients";
+    private final static String GET_ALL_CLIENTS = "select * from clients order by id";
     private final static String GET_CLIENT_BY_ID = "select * from clients where id=?";
     private final static String DELETE_CLIENT_BY_ID = "delete from clients where id=?";
     private final static String UPDATE_CLIENT_BY_ID = "update clients set fullname=?, address=? where id=?";

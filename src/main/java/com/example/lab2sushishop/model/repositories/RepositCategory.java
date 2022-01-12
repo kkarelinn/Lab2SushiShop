@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 @Repository
 public class RepositCategory implements Repositor {
-    private final static String GET_ALL_CATEGORIES = "select * from category";
+    private final static String GET_ALL_CATEGORIES = "select * from category order by id";
     private final static String GET_CATEGORY_BY_ID = "select * from category where id=?";
     private final static String DELETE_CATEGORY_BY_ID = "delete from category where id=?";
     private final static String UPDATE_CATEGORY_BY_ID = "update category set title=?, description=?, date=?  where id=?";

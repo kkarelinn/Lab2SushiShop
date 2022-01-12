@@ -19,7 +19,7 @@ public class Cart implements Entity {
 
     @NotBlank
     @Size(min=2, max=50)
-    private String deliveryAddr;
+    private String deliveryAddress;
     private String status;
 
     public Cart() { }
@@ -34,7 +34,7 @@ public class Cart implements Entity {
         this.client_ID = client_ID;
         this.totalPriceUAH = totalPrice_uah;
         this.date = date;
-        this.deliveryAddr = deliveryAddress;
+        this.deliveryAddress = deliveryAddress;
         this.status = status;
     }
 
@@ -79,11 +79,11 @@ public class Cart implements Entity {
     }
 
     public String getDeliveryAddress() {
-        return deliveryAddr;
+        return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String deliveryAddr) {
-        this.deliveryAddr = deliveryAddr;
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 
     public String getStatus() {
@@ -102,7 +102,7 @@ public class Cart implements Entity {
                 ", client_ID=" + client_ID +
                 ", totalPriceUAH=" + totalPriceUAH +
                 ", date=" + date +
-                ", deliveryAddr='" + deliveryAddr + '\'' +
+                ", deliveryAddr='" + deliveryAddress + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

@@ -17,6 +17,7 @@ public class User implements Entity {
 
     @Min(value = 1, message = "id should be more than 0")
     private int manager;
+    User man;
 
     @NotBlank
     @Size(min=2, max=20)
@@ -26,10 +27,12 @@ public class User implements Entity {
        super();
     }
 
-    public User(String fullName, int manager, String role) {
+    public User(int ID, String fullName, int manager, User man, String accessRole) {
+        this.ID = ID;
         this.fullName = fullName;
         this.manager = manager;
-        this.accessRole = role;
+        this.man = man;
+        this.accessRole = accessRole;
     }
 
     public int getID() {
@@ -43,6 +46,14 @@ public class User implements Entity {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public User getMan() {
+        return man;
+    }
+
+    public void setMan(User man) {
+        this.man = man;
     }
 
     public String getFullName() {

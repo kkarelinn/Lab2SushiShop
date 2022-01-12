@@ -24,18 +24,18 @@
         <th>Total price UAH</th>
 
     </tr>
-    <c:forEach var="ord" items="${orders}">
+    <c:forEach var="ord" items="${tempOrders}">
         <tr>
-            <th>${ord[1]}</th>
-            <th>${ord[2]}</th>
-            <th>${ord[4]}</th>
-            <th>${ord[5]}</th>
-            <th>${ord[6]}</th>
+            <th>${ord.product.title}</th>
+            <th>${ord.product.description}</th>
+            <th>${ord.product.priceUsd}</th>
+            <th>${ord.quantity}</th>
+            <th>${ord.total_price_uah}</th>
         </tr>
     </c:forEach>
 </table>
-<h3 >Total: ${cartAp.totalPrice_uah}</h3>
-<h3>Delivery address: ${cartAp.deliveryAddress}</h3>
+<h3 >Total: ${cart.totalPrice_uah} грн</h3>
+<h3>Delivery address: ${cart.deliveryAddress}</h3>
 <h3>Client name: ${client.fullName}</h3>
 
 <br>

@@ -23,14 +23,14 @@
             <th>Access</th>
 
         </tr>
-        <c:forEach var="user" items="${userStr}">
+        <c:forEach var="user" items="${users}">
         <tr>
-            <td>${user[0]}</td>
-            <td>${user[1]}</td>
-            <td>${user[2]}</td>
-            <td>${user[3]}</td>
-            <td><a href="users/${user[0]}">edit</a></td>
-            <td><a href="users/del/${user[0]}">delete</a></td>
+            <td>${user.ID}</td>
+            <td>${user.fullName}</td>
+            <td>${user.man.fullName}</td>
+            <td>${user.accessRole}</td>
+            <td><a href="users/${user.ID}">edit</a></td>
+            <td><a href="users/del/${user.ID}">delete</a></td>
         </tr>
         </c:forEach>
     </table>

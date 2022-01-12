@@ -17,11 +17,11 @@
     <form:label path="fullName">full Name: </form:label> <form:input type="text" path="fullName"/>
     <label>manager:</label>
     <form:select path="manager">
-        <form:options items="${userMan}"  itemLabel="fullName" itemValue="ID"/>
+        <form:options items="${userMan}" itemLabel="fullName" itemValue="ID"/>
     </form:select>
     <label>role:</label>
     <form:select path="accessRole">
-        <form:options items="${roles}"  itemLabel="name" itemValue="name"/>
+        <form:options items="${roles}" itemLabel="name" itemValue="name"/>
     </form:select>
     <input type="submit" value="Submit"/>
 </form:form>

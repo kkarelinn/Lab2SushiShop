@@ -1,11 +1,13 @@
 package com.example.lab2sushishop.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Component
+@EntityScan
 public class Client implements Entity {
 
     private int ID;

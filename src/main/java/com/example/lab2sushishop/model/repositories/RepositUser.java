@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Repository
 public class RepositUser implements Repositor {
 
     private final static String DEFAULT_ROLE = UserAccess.CUSTOMER.toString();
-    private final static String GET_ALL_USERS = "select * from users";
+    private final static String GET_ALL_USERS = "select * from users order by id";
     private final static String GET_USER_BY_ID = "select * from users where id=?";
     private final static String DELETE_USER_BY_ID = "delete from users where id=?";
     private final static String UPDATE_USER_BY_ID = "update users set fullname=?, manager=?, access_role=? where id=?";
@@ -25,12 +26,13 @@ public class RepositUser implements Repositor {
 
     @Autowired
     public RepositUser(JdbcTemplate jdbcTemplate) {
-               this.jdbcTemplate = jdbcTemplate;
-         }
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<User> getList() {
-        return jdbcTemplate.query(GET_ALL_USERS, new BeanPropertyRowMapper<>(User.class));
+      return jdbcTemplate.query(GET_ALL_USERS, new BeanPropertyRowMapper<>(User.class))
+                .stream().peek(u -> u.setMan(show(u.getManager()))).collect(Collectors.toList());
     }
 
     @Override
@@ -60,33 +62,15 @@ public class RepositUser implements Repositor {
     }
 
     @Override
-    public Entity show(int id) {
-      return jdbcTemplate.queryForObject(GET_USER_BY_ID, new BeanPropertyRowMapper<>(User.class), id);
+    public User show(int id) {
+        if (id == 0) return null;
+        User user;
+        try{
+            user = jdbcTemplate.queryForObject(GET_USER_BY_ID, new BeanPropertyRowMapper<>(User.class), id);
+        } catch (Exception e)
+        { user = null;}
+
+        return user;
     }
 
-    // get multi List<String[]> from different tables
-
-    public List<String[]> getUsersManString() {
-        List<String[]> getUsersManString = new ArrayList<>();
-        List<User> userList = getList();
-        for (User user : userList) {
-            getUsersManString.add(getUserManString(user.getID()));
-        }
-        return getUsersManString;
-    }
-
-    public String[] getUserManString(int usID) {
-       User user = (User)show(usID);
-
-        StringBuilder line = new StringBuilder();
-        line.append(user.getID()).append("~");              //[0] - ID
-        line.append(user.getFullName()).append("~");        //[1] - fullName
-        String man = (user.getManager()==0)
-                ? "none"
-                : ((User)show(user.getManager())).getFullName() ;
-        line.append(man).append("~");                       //[2] - manager-name
-        line.append(user.getAccessRole());                  //[3] - role
-
-        return line.toString().split("~");
-    }
 }

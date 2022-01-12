@@ -12,17 +12,19 @@ public class Order implements Entity {
     private int ID;
 
     private int product_ID;
+    Product product;
     private int cart_ID;
     private double total_price_uah;
 
     @Min(value = 1)
-    private int quantity;
+    private int quantity = 1;
     public Order() {
     }
 
-    public Order(int product_ID, int cart_ID, double total_price_uah, int quantity) {
-
+    public Order(int ID, int product_ID, Product product, int cart_ID, double total_price_uah, int quantity) {
+        this.ID = ID;
         this.product_ID = product_ID;
+        this.product = product;
         this.cart_ID = cart_ID;
         this.total_price_uah = total_price_uah;
         this.quantity = quantity;
@@ -44,6 +46,14 @@ public class Order implements Entity {
 
     public void setProduct_ID(int product_ID) {
         this.product_ID = product_ID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getCart_ID() {
