@@ -2,6 +2,7 @@ package com.example.lab2sushishop.model;
 
 import org.springframework.stereotype.Component;
 import javax.validation.constraints.Min;
+import java.util.Objects;
 
 
 @Component
@@ -93,4 +94,21 @@ public class Order implements Entity {
     public void setDate(String date) {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return ID == order.ID
+                && product_ID == order.product_ID
+                && cart_ID == order.cart_ID
+                && Double.compare(order.total_price_uah, total_price_uah) == 0
+                && quantity == order.quantity
+                && product.equals(order.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, product_ID, product, cart_ID, total_price_uah, quantity);
+    }
 }

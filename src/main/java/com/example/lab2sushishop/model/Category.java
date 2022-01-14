@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Component
 @EntityScan
@@ -77,5 +78,21 @@ public class Category implements Entity {
                 ", description='" + description + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return ID == category.ID
+                && title.equals(category.title)
+                && description.equals(category.description)
+                && date.equals(category.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, title, description, date);
     }
 }

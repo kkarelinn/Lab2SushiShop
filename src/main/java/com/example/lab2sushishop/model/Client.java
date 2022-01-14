@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Component
 @EntityScan
@@ -65,5 +66,20 @@ public class Client implements Entity {
                 ", fullName='" + fullName + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return ID == client.ID
+                && fullName.equals(client.fullName)
+                && address.equals(client.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, fullName, address);
     }
 }
