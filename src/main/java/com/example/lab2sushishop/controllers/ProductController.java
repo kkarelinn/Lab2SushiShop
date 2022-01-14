@@ -1,6 +1,5 @@
 package com.example.lab2sushishop.controllers;
 
-
 import com.example.lab2sushishop.model.Category;
 import com.example.lab2sushishop.model.Product;
 import com.example.lab2sushishop.model.repositories.RepositProduct;
@@ -34,9 +33,7 @@ RepositProduct repositor;
 
     @GetMapping("/{id}")
     public String show(@ModelAttribute("product") Product product, @PathVariable("id") int id, Model model) {
-
        model.addAttribute("product", repositor.show(id));
-
         return "products/editProd";
     }
 
@@ -48,7 +45,6 @@ RepositProduct repositor;
 
         product.setLinkProduct(repositor.show(product.getLinkprod_id()));
         product.setCategory(repositor.getCatById(product.getCategory_id()));
-
         repositor.update(product);
         return "redirect:/products";
     }
@@ -63,23 +59,24 @@ RepositProduct repositor;
 
         if (bindingResult.hasErrors())
             return "products/addNew";
-        System.out.println(product);
+
         product.setLinkProduct(repositor.show(product.getLinkprod_id()));
         product.setCategory(repositor.getCatById(product.getCategory_id()));
         repositor.addNew(product);
         return "redirect:/products";
     }
+
     @ModelAttribute("cats")
     public List<Category> categoryList(){
         return repositor.getListCats();
     }
+
     @ModelAttribute("prods")
     public List<Product> listWithEmpty(){
         List<Product> listWithEmpty = repositor.getList();
         listWithEmpty.add(new Product());
         return listWithEmpty;
     }
-
 
 
    @GetMapping("/del/{id}")

@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Component
@@ -25,7 +24,6 @@ public class RepositCart implements Repositor {
     private final static String GET_CLIENT_BY_ID = "select * from clients where id=?";
     private final static String GET_PRODUCT_BY_ID = "select * from products where id=?";
     private final static String GET_CATEGORY_BY_ID = "select * from category where id=?";
-    private static final String GET_ORDERS_BY_CART_ID = "select * from orders where cart_id=?";
     private static final int DEFAULT_CLIENT = 1;
 
     private final JdbcTemplate jdbcTemplate;
@@ -116,7 +114,6 @@ public class RepositCart implements Repositor {
     public void delete(int id) {
         jdbcTemplate.update(DELETE_ORDERS_BY_CART_ID, id);
         jdbcTemplate.update(DELETE_CART_BY_ID, id);
-
     }
 
     @Override

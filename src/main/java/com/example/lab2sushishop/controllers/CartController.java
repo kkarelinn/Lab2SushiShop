@@ -1,20 +1,15 @@
 package com.example.lab2sushishop.controllers;
 
-
 import com.example.lab2sushishop.Log.Loging;
 import com.example.lab2sushishop.model.*;
 import com.example.lab2sushishop.model.repositories.RepositCart;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
-
 import java.util.List;
 
 @Controller
@@ -59,14 +54,7 @@ public class CartController {
         tempOrderList.add(order);
         return "redirect:/carts";
     }
-/*
-    private List<Product> getProductsFromTempCart() {
-        List<Product> prodInCart = new ArrayList<>();
-        for (Order ord : tempOrderList) {
-            prodInCart.add(ord.getProduct());
-        }
-        return prodInCart;
-    }*/
+
     @Loging
     @GetMapping("/details")
     public String addDetails(Model model) {
@@ -114,10 +102,7 @@ public class CartController {
     @Loging
     @GetMapping("/allcarts")
     public String showCarts(Model model) {
-//        List<?> list = repositor.getList();
-//        list.forEach(System.out::println);
         model.addAttribute("carts", repositor.getList());
-
         return "cart/showAll";
     }
 
@@ -125,7 +110,6 @@ public class CartController {
         if (tempOrderList == null) {
             tempOrderList = new ArrayList<>();
         } else {
-
             double totalPr = 0;
             for (Order order : tempOrderList) {
                 totalPr += order.getTotal_price_uah();

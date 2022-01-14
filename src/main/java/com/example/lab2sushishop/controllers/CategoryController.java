@@ -1,7 +1,5 @@
 package com.example.lab2sushishop.controllers;
 
-
-
 import com.example.lab2sushishop.model.Category;
 import com.example.lab2sushishop.model.repositories.RepositCategory;
 import com.example.lab2sushishop.model.repositories.Repositor;
@@ -10,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-
 
 @Controller
 @RequestMapping("/categories")
@@ -42,6 +38,7 @@ public class CategoryController {
     {
         if (bindingResult.hasErrors())
             return "categories/editCat";
+
         repositor.update(category);
         return "redirect:/categories";
     }

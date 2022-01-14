@@ -6,12 +6,9 @@ import com.example.lab2sushishop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -81,14 +78,14 @@ public class RepositProduct implements Repositor {
     public void update(Entity entity) {
         Product product = (Product) entity;
         product.setDate(getNowDate());
-        int category_ID = (product.getCategory_id() == 0) ? DEFAULT_CATEGORY_ID : product.getCategory_id();  //change
+        int category_ID = (product.getCategory_id() == 0) ? DEFAULT_CATEGORY_ID : product.getCategory_id();
         jdbcTemplate.update(UPDATE_PRODUCT_BY_ID,
 
                 product.getTitle(),
                 product.getDescription(),
                 product.getDate(),
                 product.getPriceUsd(),
-                category_ID,                //change
+                category_ID,
                 product.getLinkprod_id(),
                 product.getID());
     }

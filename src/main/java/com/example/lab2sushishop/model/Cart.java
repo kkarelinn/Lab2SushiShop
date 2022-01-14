@@ -10,19 +10,18 @@ import javax.validation.constraints.*;
 public class Cart implements Entity {
 
     private int ID;
-
     private int user_ID;
     private int client_ID;
-
     private double totalPriceUAH;
     private String date;
 
     @NotBlank
-    @Size(min=2, max=50)
+    @Size(min = 2, max = 50)
     private String deliveryAddress;
     private String status;
 
-    public Cart() { }
+    public Cart() {
+    }
 
     public Cart(int user_ID,
                 int client_ID,

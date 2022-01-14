@@ -3,7 +3,6 @@ package com.example.lab2sushishop.model.repositories;
 import com.example.lab2sushishop.model.Entity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

@@ -1,17 +1,13 @@
 package com.example.lab2sushishop.controllers;
 
-
-
 import com.example.lab2sushishop.model.Client;
 import com.example.lab2sushishop.model.repositories.RepositClient;
-
 import com.example.lab2sushishop.model.repositories.Repositor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @Controller

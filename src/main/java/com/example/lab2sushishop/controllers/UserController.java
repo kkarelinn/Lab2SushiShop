@@ -1,7 +1,6 @@
 package com.example.lab2sushishop.controllers;
 
 
-
 import com.example.lab2sushishop.model.User;
 import com.example.lab2sushishop.model.UserAccess;
 import com.example.lab2sushishop.model.repositories.RepositUser;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,11 +17,9 @@ public class UserController {
 
     final RepositUser repositor;
 
-
     @Autowired
     public UserController(RepositUser repositor) {
         this.repositor = repositor;
-
     }
 
     @GetMapping
@@ -34,8 +30,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", repositor.show(id) );
-        model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
+        model.addAttribute("user", repositor.show(id));
+        model.addAttribute("roles", Arrays.asList(UserAccess.values()));
         return "users/editUser";
     }
 
@@ -48,7 +44,7 @@ public class UserController {
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user, Model model) {
-        model.addAttribute("roles", Arrays.asList(UserAccess.values()) );
+        model.addAttribute("roles", Arrays.asList(UserAccess.values()));
 
         return "users/addNew";
     }

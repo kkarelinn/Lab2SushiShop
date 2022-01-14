@@ -1,8 +1,6 @@
 package com.example.lab2sushishop.model;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.Min;
 
 
@@ -10,7 +8,6 @@ import javax.validation.constraints.Min;
 public class Order implements Entity {
 
     private int ID;
-
     private int product_ID;
     Product product;
     private int cart_ID;
@@ -94,8 +91,6 @@ public class Order implements Entity {
 
     @Override
     public void setDate(String date) {
-
     }
-
 
 }

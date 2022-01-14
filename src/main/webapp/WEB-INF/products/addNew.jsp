@@ -1,4 +1,4 @@
-
+<%@ page import="com.example.lab2sushishop.model.Product" %>
 <%--
   Created by IntelliJ IDEA.
   User: HomePC
@@ -37,10 +37,11 @@
     <br>
     <div>
         <label>Category:</label>
-        <form:select path="category_id">
-            <form:options items="${cats}"  itemLabel="title" itemValue="ID"/>
+        <form:select path="category_id" >
+            <form:options  items="${cats}"  itemLabel="title" itemValue="ID" />
         </form:select>
     </div>
+
     <br>
     <div>
         <label>LinkProduct:</label>

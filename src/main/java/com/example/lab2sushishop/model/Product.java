@@ -2,6 +2,7 @@ package com.example.lab2sushishop.model;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,18 +12,16 @@ import javax.validation.constraints.Size;
 public class Product implements Entity {
 
     private int ID;
-
     private int category_id;
     private Category category;
-
     private int linkprod_id;
     private Product linkProduct;
 
     @NotBlank()
-    @Size(min=2, max=20)
+    @Size(min = 2, max = 20)
     private String title;
 
-    @Size(min=3, max=50)
+    @Size(min = 3, max = 50)
     private String description;
 
     private String date;
@@ -30,7 +29,7 @@ public class Product implements Entity {
     private double priceUsd;
 
     public Product() {
-       }
+    }
 
     public Product(int ID,
                    int category_id,
@@ -129,14 +128,13 @@ public class Product implements Entity {
     public String toString() {
         return "Product{" +
                 "ID=" + ID +
-                ", category_ID=" + ((category==null)? "none" : category.getID()) +
-                ", linkProd_ID=" + ((linkProduct==null)? "none" : linkProduct.getID()) +
+                ", category_ID=" + ((category == null) ? "none" : category.getID()) +
+                ", linkProd_ID=" + ((linkProduct == null) ? "none" : linkProduct.getID()) +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", date=" + date +
                 ", priceUsd=" + priceUsd +
                 '}';
     }
-
 
 }

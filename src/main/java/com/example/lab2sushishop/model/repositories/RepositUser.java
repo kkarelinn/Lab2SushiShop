@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +30,7 @@ public class RepositUser implements Repositor {
 
     @Override
     public List<User> getList() {
-      return jdbcTemplate.query(GET_ALL_USERS, new BeanPropertyRowMapper<>(User.class))
+        return jdbcTemplate.query(GET_ALL_USERS, new BeanPropertyRowMapper<>(User.class))
                 .stream().peek(u -> u.setMan(show(u.getManager()))).collect(Collectors.toList());
     }
 
@@ -65,10 +64,11 @@ public class RepositUser implements Repositor {
     public User show(int id) {
         if (id == 0) return null;
         User user;
-        try{
+        try {
             user = jdbcTemplate.queryForObject(GET_USER_BY_ID, new BeanPropertyRowMapper<>(User.class), id);
-        } catch (Exception e)
-        { user = null;}
+        } catch (Exception e) {
+            user = null;
+        }
 
         return user;
     }
