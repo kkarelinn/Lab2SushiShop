@@ -3,6 +3,7 @@ package com.example.lab2sushishop.controllers;
 import com.example.lab2sushishop.Log.Loging;
 import com.example.lab2sushishop.model.*;
 import com.example.lab2sushishop.model.repositories.RepositCart;
+import com.example.lab2sushishop.services.GetUSDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,9 @@ import java.util.List;
 @RequestMapping("/carts")
 public class CartController {
 
-    private final static double COURSE_USD = 27.55;
+    private static double COURSE_USD;
+    @Autowired
+    GetUSDService getUSDService;
     RepositCart repositor;
     final Order order;
     Cart tempCart;
@@ -31,6 +34,8 @@ public class CartController {
     @Loging
     @GetMapping()
     public String index(Model model) {
+        COURSE_USD = getUSDService.getRate();
+
         updateCart();
         model.addAttribute("tempOrders", tempOrderList);
         model.addAttribute("tempCart", tempCart);
