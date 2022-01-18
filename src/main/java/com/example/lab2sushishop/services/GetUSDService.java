@@ -1,5 +1,8 @@
 package com.example.lab2sushishop.services;
 
+import com.example.lab2sushishop.Log.LoggingAspect;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +11,8 @@ import java.io.IOException;
 
 @Service
 public class GetUSDService {
+
+    private final static Logger logger = LogManager.getLogger(LoggingAspect.class);
 
     @Value("${currency.USDurl}")
     private String sourceUrl;
@@ -19,13 +24,13 @@ public class GetUSDService {
     public double getRate() {
         Document answer = null;
         try {
-            answer = Jsoup.connect(sourceUrl).get();
+            answer = Jsoup.connect(sourceUrl+"dd").get();
             System.out.println("title doc " + answer.title());
             String rate = answer.selectFirst("rate").text();
             return Double.parseDouble(rate);
 
         } catch (IOException e) {
-           e.getMessage();
+            logger.error("EXCEPTION getRate() {}\n", e.getMessage());
             return defUSD;
         }
     }
