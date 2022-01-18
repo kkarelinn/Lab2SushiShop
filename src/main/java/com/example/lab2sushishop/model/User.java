@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Component
 public class User implements Entity {
@@ -87,6 +88,23 @@ public class User implements Entity {
                 ", manager=" + manager +
                 ", accessRight='" + accessRole + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return ID == user.ID
+                && manager == user.manager
+                && fullName.equals(user.fullName)
+                && Objects.equals(man, user.man)
+                && accessRole.equals(user.accessRole);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, fullName, manager, man, accessRole);
     }
 }
 

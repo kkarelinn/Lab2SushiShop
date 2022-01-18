@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.*;
+import java.util.Objects;
 
 @Component
 @Scope("prototype")
@@ -104,5 +105,24 @@ public class Cart implements Entity {
                 ", deliveryAddr='" + deliveryAddress + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return ID == cart.ID
+                && user_ID == cart.user_ID
+                && client_ID == cart.client_ID
+                && Double.compare(cart.totalPriceUAH, totalPriceUAH) == 0
+                && date.equals(cart.date)
+                && deliveryAddress.equals(cart.deliveryAddress)
+                && status.equals(cart.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, user_ID, client_ID, totalPriceUAH, date, deliveryAddress, status);
     }
 }

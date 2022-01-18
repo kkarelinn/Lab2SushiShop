@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Component
 @EntityScan
@@ -137,4 +138,24 @@ public class Product implements Entity {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return ID == product.ID
+                && category_id == product.category_id
+                && linkprod_id == product.linkprod_id
+                && Double.compare(product.priceUsd, priceUsd) == 0
+                && category.equals(product.category)
+                && Objects.equals(linkProduct, product.linkProduct)
+                && title.equals(product.title)
+                && Objects.equals(description, product.description)
+                && date.equals(product.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, category_id, category, linkprod_id, linkProduct, title, description, date, priceUsd);
+    }
 }
