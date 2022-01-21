@@ -24,12 +24,12 @@ public class GetUSDService {
     public double getRate() {
         Document answer = null;
         try {
-            answer = Jsoup.connect(sourceUrl+"dd").get();
+            answer = Jsoup.connect(sourceUrl).get();
             System.out.println("title doc " + answer.title());
             String rate = answer.selectFirst("rate").text();
             return Double.parseDouble(rate);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("EXCEPTION getRate() {}\n", e.getMessage());
             return defUSD;
         }

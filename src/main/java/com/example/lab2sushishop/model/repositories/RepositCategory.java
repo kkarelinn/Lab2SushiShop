@@ -27,7 +27,7 @@ public class RepositCategory implements Repositor {
     }
 
     @Override
-    public List<?> getList() {
+    public List<Category> getList() {
         return jdbcTemplate.query(GET_ALL_CATEGORIES, new BeanPropertyRowMapper<>(Category.class));
     }
 
@@ -42,7 +42,7 @@ public class RepositCategory implements Repositor {
     }
 
     @Override
-    public Entity show(int id) {
+    public Category show(int id) {
         return jdbcTemplate.queryForObject(GET_CATEGORY_BY_ID, new BeanPropertyRowMapper<>(Category.class), id);
     }
 

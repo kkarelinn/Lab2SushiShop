@@ -17,6 +17,8 @@ public class RepositOrder implements Repositor{
     private final static String GET_ALL_ORDERS = "select * from orders order by id";
     private final static String GET_ORDER_BY_ID = "select * from orders where id=?";
     private final static String DELETE_ORDER_BY_ID = "delete from orders where id=?";
+    private final static String ADD_NEW_ORDER = "insert into orders (product_ID, cart_ID, total_price_uah, quantity) values (?, ?, ?, ?)";
+
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -32,6 +34,12 @@ public class RepositOrder implements Repositor{
 
     @Override
     public void addNew(Entity entity) {
+        Order order = (Order) entity;
+        jdbcTemplate.update(ADD_NEW_ORDER,
+                order.getProduct_ID(),
+                order.getCart_ID(),
+                order.getTotal_price_uah(),
+                order.getQuantity());
     }
 
     @Override
