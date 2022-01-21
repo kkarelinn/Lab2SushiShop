@@ -18,16 +18,14 @@ public class RepositProduct implements Repositor {
     private final static int DEFAULT_CATEGORY_ID = 1;
 
     private final static String GET_ALL_PRODUCTS = "select * from products order by id";
-    private final static String GET_ALL_CATEGORIES = "select * from category";
-
     private final static String GET_PRODUCT_BY_ID = "select * from products where id=?";
-    private final static String GET_CATEGORY_BY_ID = "select * from category where id=?";
-
     private final static String DELETE_PRODUCT_BY_ID = "delete from products where id=?";
     private final static String UPDATE_PRODUCT_BY_ID = "update products set title=?, description=?, date=?, price_usd=?, category_id=?, linkprod_id=? where id=?";
     private final static String ADD_NEW_PRODUCT = "insert into products (title, description, date, price_usd, category_id, linkprod_id) values (?, ?, ?, ?, ?, ?)";
 
     private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    private RepositCategory repositCategory;
 
 
     @Autowired
@@ -46,7 +44,7 @@ public class RepositProduct implements Repositor {
     }
 
     public List<Category> getListCats() {
-        return jdbcTemplate.query(GET_ALL_CATEGORIES, new BeanPropertyRowMapper<>(Category.class));
+        return repositCategory.getList();
     }
 
     @Override
@@ -71,7 +69,7 @@ public class RepositProduct implements Repositor {
     }
 
     public Category getCatById(int cat_id) {
-        return (cat_id == 0) ? null : jdbcTemplate.queryForObject(GET_CATEGORY_BY_ID, new BeanPropertyRowMapper<>(Category.class), cat_id);
+        return (cat_id == 0) ? null : repositCategory.show(cat_id);
     }
 
     @Override
