@@ -38,8 +38,9 @@
     <div>
         <label>Category:</label>
         <form:select path="category_id" >
-            <form:options  items="${cats}"  itemLabel="title" itemValue="ID" />
-        </form:select>
+            <form:options  items="${cats}"  var="cat" itemLabel="title" itemValue="ID" />
+          </form:select>
+
     </div>
 
     <br>

@@ -59,7 +59,7 @@ RepositProduct repositor;
 
         if (bindingResult.hasErrors())
             return "products/addNew";
-
+        System.out.println("TEST>>>>"+product.getCategory());
         product.setLinkProduct(repositor.show(product.getLinkprod_id()));
         product.setCategory(repositor.getCatById(product.getCategory_id()));
         repositor.addNew(product);

@@ -7,7 +7,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import java.io.IOException;
 
 @Service
 public class GetUSDService {
@@ -24,13 +23,14 @@ public class GetUSDService {
     public double getRate() {
         Document answer = null;
         try {
+            System.out.println("connect to " + sourceUrl);
             answer = Jsoup.connect(sourceUrl).get();
-            System.out.println("title doc " + answer.title());
             String rate = answer.selectFirst("rate").text();
+            System.out.println("get rec.USD course:  "+rate);
             return Double.parseDouble(rate);
-
         } catch (Exception e) {
             logger.error("EXCEPTION getRate() {}\n", e.getMessage());
+            System.out.println("get default USD cource: " + defUSD);
             return defUSD;
         }
     }

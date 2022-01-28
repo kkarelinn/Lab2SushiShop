@@ -56,7 +56,15 @@ public class CartController {
         order.setProduct(repositor.getProdById(prod_id));
         order.getProduct().setCategory(repositor.getCatById(cat_id));
         order.setTotal_price_uah(Math.round(priceUsd * COURSE_USD * order.getQuantity() * 100) / 100d);
-        tempOrderList.add(order);
+       boolean isPresent = tempOrderList.stream().anyMatch(o->o.getProduct_ID()==order.getProduct_ID());
+        if (isPresent){
+            Order present = tempOrderList.stream().filter(o->o.getProduct_ID()== order.getProduct_ID()).findFirst().get();
+            present.setQuantity(present.getQuantity()+order.getQuantity());
+            present.setTotal_price_uah(present.getTotal_price_uah()+ order.getTotal_price_uah());
+        } else{
+            tempOrderList.add(order);
+        }
+
         return "redirect:/carts";
     }
 
@@ -121,6 +129,5 @@ public class CartController {
             }
             tempCart.setTotalPrice_uah(Math.round(totalPr * 100) / 100d);
         }
-
     }
 }
