@@ -1,5 +1,6 @@
 package com.example.lab2sushishop.controllers;
 
+
 import com.ibatis.common.jdbc.ScriptRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
